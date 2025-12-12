@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SM Team</title>
+
+<style>
+  html,body{
+    margin:0; padding:0;
+    background:#000;
+    overflow:hidden;
+    font-family:Arial;
+  }
+
+  /* BACKGROUND PARTICLES */
+  #particles-bg{
+    position:fixed;
+    width:100%; height:100%;
+    top:0; left:0;
+    z-index:1;
+  }
+
+  iframe{
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    border:none;
+    z-index:2;
+  }
+
+  #ui{
+    position:fixed;
+    width:100%; height:100%;
+    pointer-events:none;
+    z-index:9999;
+  }
+
+  /* Floating Round Icon - Enhanced Glow (Draggable) */
+  #modIcon{
+    width:70px; height:70px;
+    background-size:cover;
+    background-position:center;
+    border-radius:50%;
+    position:fixed;
+    top:20px; left:20px;
+    box-shadow: 0 0 15px #00ffff, 0 0 40px #0099ff, 0 0 70px #0099ff;
+    cursor:grab;
+    pointer-events:auto;
+    transition:0.3s;
+  }
+
+  /* --- PASSWORD SCREEN --- */
+  #passScreen{
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0, 0, 0, 0.95);
+    z-index:999999;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    pointer-events: auto;
+  }
+
+  #passBox{
+    background: #111;
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid #ff33ff;
+    box-shadow: 0 0 30px #ff33ff;
+    text-align: center;
+  }
+
+  #passInput{
+    width: 180px;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    border: 1px solid #00ffff;
+    background: #000;
+    color: #00ffc8;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  #passBtn, #getPassBtn{
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 14px;
+    display: block;
+    width: 100%;
+  }
+
+  #passBtn{
+    background: #00ffc8;
+    color: #000;
+  }
+  #getPassBtn{
+    background: #ff33ff;
+    color: #fff;
+  }
+  .passLabel{
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  /* EXPANDED MENU - Beautiful Glow (Draggable when open) */
+  #modMenu{
+    position:fixed;
+    top:20px; left:20px;
+    width:0; height:0;
+    overflow:hidden;
+    background:rgba(0, 0, 0, 0.9); 
+    border:2px solid #00ffff;
+    border-radius:20px;
+    box-shadow: 0 0 30px #00ffff, inset 0 0 15px rgba(0, 255, 255, 0.4); 
+    pointer-events:auto;
+    z-index:9999999;
+    transition:0.35s ease;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding-top:0;
+    cursor: grab;
+  }
+  
+  /* SM Team Title Style */
+  .menuTitle{
+    color: #00ffc8;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px; 
+    padding-top: 10px; 
+    text-shadow: 0 0 10px #00ffc8;
+    cursor: grab;
+  }
+
+  #closeBtn{
+    width:100%;
+    text-align:right;
+    font-size:22px;
+    font-weight:bold;
+    padding-right:10px;
+    margin-top:5px;
+    cursor:pointer;
+    color:#ff0066;
+    text-shadow: 0 0 5px #ff0066;
+    position: absolute; 
+    top: 0;
+    right: 0;
+    pointer-events: auto;
+  }
+
+  .label{color:#33ffff;font-size:12px;margin-top:5px;} 
+  .time{color:#ffffff;font-size:13px;}
+  .count{color:#ffff33;font-size:18px;font-weight:bold;}
+  .signal{color:#00ffaa;font-size:22px;font-weight:bold;margin-top:5px;}
+  .vis{color:#33ffff;font-size:12px;margin-top:8px;}
+  
+  /* Credit at the bottom */
+  .credit{
+    color:#ff33ff;
+    font-size:10px; 
+    margin-top:10px;
+    font-weight:bold; 
+    text-shadow: 0 0 5px #ff33ff;
+  }
+
+  /* Music Button */
+  #musicBtn, #telegramBtn{
+    margin-top:8px;
+    border:none;
+    padding:8px 20px;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow: 0 0 10px;
+    transition: 0.2s;
+    pointer-events: auto;
+  }
+  #musicBtn{
+    background:#00ffee;
+    color: #000;
+    box-shadow: 0 0 10px #00ffee;
+  }
+  #telegramBtn{
+    background: #0088cc; /* Telegram Blue */
+    color: #fff;
+    box-shadow: 0 0 10px #0088cc;
+  }
+</style>
+</head>
+
+<body>
+
+<div id="particles-bg"></div>
+
+<iframe src="https://dkwin10.com/#/register?invitationCode=44777678996"></iframe>
+
+<div id="ui">
+  
+  <div id="passScreen">
+    <div id="passBox">
+      <div class="passLabel">Enter Password:</div>
+      <input type="password" id="passInput" placeholder="Enter Password">
+      <button id="passBtn">Open Menu</button>
+      <button id="getPassBtn">GET PASSWORD</button>
+      <p style="color:red; font-size:12px;" id="errorMsg"></p>
+    </div>
+  </div>
+
+  <div id="modIcon" style="background-image:url('https://files.catbox.moe/j8r2m8.jpg');"></div>
+
+  <div id="modMenu">
+    
+    <div class="menuTitle">SM Team</div>
+    
+    <div id="closeBtn">✖</div>
+
+    <button id="telegramBtn">🤖 Telegram Join</button>
+
+    <div class="label">TIME</div>
+    <div class="time" id="timeNow">00:00:00</div>
+
+    <div class="label">COUNTDOWN</div>
+    <div class="count" id="countDown">0s</div>
+
+    <div class="label">SIGNAL</div>
+    <div class="signal" id="signalText">SMALL</div>
+
+    <button id="musicBtn">Music OFF</button>
+
+    <div class="vis" id="visitorCount">Visitors: 0</div>
+
+    <div class="credit">mod by SM Team</div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<script>
+// Base64 decoding function
+function decodeBase64(str) {
+    // This function converts a Base64 string back to normal text
+    return atob(str);
+}
+
+/* CONFIGURATION */
+// "SM Team X SPEED X" is encoded as "U00gVGVhbSBYIFNQRUVEIFg="
+// This hides the password from direct viewing in the code.
+const ENCODED_PASSWORD = "U00gVGVhbSBYIFNQRUVEIFg=";
+const CORRECT_PASSWORD = decodeBase64(ENCODED_PASSWORD);
+
+const TELEGRAM_LINK = "https://t.me/+7uPaMb_0XtZkMTc9"; // Telegram Join Link
+const GET_PASSWORD_LINK = "https://t.me/samiul_mentor"; // Link to get password source
+
+/* ELEMENTS */
+const icon = document.getElementById("modIcon");
+const menu = document.getElementById("modMenu");
+const musicBtn = document.getElementById("musicBtn");
+const telegramBtn = document.getElementById("telegramBtn");
+const passScreen = document.getElementById("passScreen");
+const passInput = document.getElementById("passInput");
+const passBtn = document.getElementById("passBtn");
+const getPassBtn = document.getElementById("getPassBtn");
+const errorMsg = document.getElementById("errorMsg");
+
+/* MUSIC */
+let audio = new Audio("https://files.catbox.moe/qgkgh4.mp3"); 
+let musicOn = false;
+
+musicBtn.onclick = ()=>{
+  musicOn = !musicOn;
+  if(musicOn){ 
+    audio.play().catch(e => console.error("Audio Play Error:", e)); 
+    musicBtn.innerText="Music ON"; 
+  }
+  else{ 
+    audio.pause(); 
+    musicBtn.innerText="Music OFF"; 
+  }
+};
+
+/* TELEGRAM BUTTON */
+telegramBtn.onclick = () => {
+    window.open(TELEGRAM_LINK, '_blank');
+};
+
+/* PASSWORD LOGIC */
+icon.onclick = () => {
+    // Save icon position before showing password screen
+    menu.style.top = icon.offsetTop + 'px'; 
+    menu.style.left = icon.offsetLeft + 'px';
+    
+    passScreen.style.display = 'flex'; // Show password screen
+};
+
+passBtn.onclick = () => {
+    if (passInput.value.trim() === CORRECT_PASSWORD) {
+        passScreen.style.display = 'none'; // Hide password screen
+        icon.style.display="none"; // Hide icon
+        
+        menu.style.width="200px";
+        menu.style.height="260px";
+        menu.style.paddingTop="0"; 
+        drag(menu); // Enable dragging on the menu
+        errorMsg.innerText = '';
+    } else {
+        errorMsg.innerText = "Wrong Password. Try again.";
+        passInput.value = ''; // Clear input
+    }
+};
+
+// Enter key press on input field should also trigger passBtn click
+passInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        passBtn.click();
+    }
+});
+
+getPassBtn.onclick = () => {
+    window.open(GET_PASSWORD_LINK, '_blank'); // Go to GET PASSWORD link
+};
+
+
+/* CLOSE MENU → ICON */
+function closeMenu(){
+  // Set icon position to menu's current position
+  icon.style.top = menu.offsetTop + 'px';
+  icon.style.left = menu.offsetLeft + 'px';
+  
+  menu.style.width="0";
+  menu.style.height="0";
+  
+  // Show icon after the transition is complete
+  setTimeout(() => {
+    icon.style.display="block";
+    drag(modIcon); // Enable dragging on the icon
+  }, 350);
+}
+document.getElementById("closeBtn").onclick = closeMenu;
+
+
+/* TIME, SIGNAL, VISITOR COUNT */
+setInterval(()=>{  
+  timeNow.innerText = new Date().toLocaleTimeString("en-GB");
+},1000);
+
+let prev30 = Math.floor(new Date().getSeconds()/30);
+setInterval(()=>{
+  const sec = new Date().getSeconds();
+  const left = 30 - (sec % 30);
+  countDown.innerText = left+"s";
+
+  let now30 = Math.floor(sec/30);
+  if(now30 !== prev30){
+    let s = ["BIG","SMALL"];
+    signalText.innerText = s[Math.floor(Math.random()*s.length)];
+    prev30 = now30;
+  }
+},200);
+
+let v = localStorage.getItem("visCount") || 0;
+v = parseInt(v) + 1;
+localStorage.setItem("visCount", v);
+visitorCount.innerText = "Visitors: " + v;
+
+/* DRAG ICON & MENU FUNCTIONALITY */
+function drag(el){
+  let x=0,y=0,active=false;
+
+  el.addEventListener("mousedown", e=>{
+    if (el === menu) {
+        // Prevent dragging if clicking on a button or close icon
+        if (e.target.id === 'closeBtn' || e.target.id === 'musicBtn' || e.target.id === 'telegramBtn') {
+            return;
+        }
+    }
+    x=e.clientX-el.offsetLeft;
+    y=e.clientY-el.offsetTop;
+    active=true;
+    if (el === menu) { el.style.cursor = 'grabbing'; }
+    if (el === icon) { el.style.cursor = 'grabbing'; }
+  });
+
+  document.addEventListener("mousemove", e=>{
+    if(!active) return;
+    el.style.left=(e.clientX-x)+"px";
+    el.style.top=(e.clientY-y)+"px";
+  });
+
+  document.addEventListener("mouseup", ()=>{
+      active=false;
+      if (el === menu) { el.style.cursor = 'grab'; }
+      if (el === icon) { el.style.cursor = 'grab'; }
+  });
+
+  el.addEventListener("touchstart", e=>{
+    let t=e.touches[0];
+    if (el === menu) {
+         if (t.target.id === 'closeBtn' || t.target.id === 'musicBtn' || t.target.id === 'telegramBtn') {
+            return;
+        }
+    }
+    x=t.clientX-el.offsetLeft;
+    y=t.clientY-el.offsetTop;
+    active=true;
+  });
+
+  document.addEventListener("touchmove", e=>{
+    if(!active) return;
+    let t=e.touches[0];
+    el.style.left=(t.clientX-x)+"px";
+    el.style.top=(t.clientY-y)+"px";
+  });
+
+  document.addEventListener("touchend", ()=>active=false);
+}
+
+drag(modIcon); // Enable icon dragging initially
+</script>
+
+</body>
+</html>
+
+/* এটা কপি করবে জে ওর মায়রে চুইদা দিবো" খানকির পোলা নিজে কিছু করে দেখা কারো টা কপি না করে আবার বলি এটা জে কপি করবে ভাববি তোর মায়রে তুই চুদলি🫵🖕। মনে রাখবি তোর আব্বু @NIROB_BBZ 💋🫦 */
